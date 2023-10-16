@@ -1,0 +1,53 @@
+<launch>
+
+  <env name="GAZEBO_MODEL_PATH" value="$(find fetch_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)" /> <!-- HAve to set this at the start so it can be used by other packages -->
+
+    <!-- standard fetch args from fetch pckg -->
+  <arg name="debug" default="false"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+
+
+
+
+  <!-- start gazebo, taken from example code using default world file-->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="world_name" value="$(find assignment_code_follow)/worlds/default.sdf"/> <!-- NEED TO CHANGE THE WORLD-->
+  </include>
+
+
+
+
+ 
+<!-- ROBOT SPAWNING STUFF -->
+
+
+  <!-- start fetch -->
+  <arg name="robot" default="fetch"/>
+  <include file="$(find fetch_gazebo)/launch/include/$(arg robot).launch.xml" />
+  
+ <!-- control turtle robot with teleop-->
+  <arg name="teleop_topic" default="/robot1/cmd_vel"/>  
+
+  <!-- Launch turtlebot as robot1 -->
+  <group ns="robot1"> <!--change to turtle???????-->
+  	<include file="$(find assignment_code_follow)/launch/spawn_sdf.launch">
+      <arg name="robot_name" value="turtlebot_burger"/>
+      <arg name="x" value="3.0"/>
+      <arg name="y" value="2.0"/>
+      <arg name="z" value="0.0"/>
+      <arg name="sdf_robot_file" value="$(find assignment_code_follow)/models/custom_turtle/model.sdf"/>
+    </include>
+  </group>
+
+  <!-- start the teleop keyboard for the turtle robot  -->
+  <node pkg="joy" type="joy_node" name="joy_node"/>
+  <node name="marker_turtle_teleop" pkg="assignment_code_follow" type="assignment_code_follow-marker_turtle_teleop" args="-d $(find assignment_code_follow)" output="screen" respawn="true">
+      <remap from="/cmd_vel" to="/robot1/cmd_vel"/>
+  </node>
+</launch>
