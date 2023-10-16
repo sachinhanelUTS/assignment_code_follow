@@ -1,12 +1,12 @@
 #include "../include/assignment_code_follow/follow_marker.h"
 
-GuiderFollow::GuiderFollow(ros::NodeHandle nh)
-    : nh_(nh)
+GuiderFollow::GuiderFollow(ros::NodeHandle node_handler)
+    : node_handler_(node_handler)
 {
-  marker_sub_ = nh_.subscribe("/aruco_single/position", 1000, &GuiderFollow::markerCallback, this);
-  laser_sub_ = nh_.subscribe("/base_scan_raw", 100, &GuiderFollow::laserCallBack, this);
+  marker_sub_ = node_handler_.subscribe("/aruco_single/position", 1000, &GuiderFollow::markerCallback, this);
+  laser_sub_ = node_handler_.subscribe("/base_scan_raw", 100, &GuiderFollow::laserCallBack, this);
 
-  vel_pub_ = nh_.advertise<geometry_msgs::Twist>("/cmd_vel", 1);
+  vel_pub_ = node_handler_.advertise<geometry_msgs::Twist>("/cmd_vel", 1);
 
   marker_.threshold_distance = 1.0 - marker_.head_2_base_offset;
   ROS_INFO_STREAM("init");

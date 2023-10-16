@@ -1,11 +1,11 @@
 #include "../include/assignment_code_follow/marker_turtle_teleop.h"
 
-GuiderJoyTeleop::GuiderJoyTeleop(ros::NodeHandle nh)
-    :nh_(nh)
+GuiderJoyTeleop::GuiderJoyTeleop(ros::NodeHandle node_handler)
+    :node_handler_(node_handler)
 {
-    joy_sub_ = nh_.subscribe("/joy", 1000, &GuiderJoyTeleop::joyCallback, this);
+    joy_sub_ = node_handler_.subscribe("/joy", 1000, &GuiderJoyTeleop::joyCallback, this);
 
-    vel_pub_ = nh_.advertise<geometry_msgs::Twist>("/cmd_vel", 1);
+    vel_pub_ = node_handler_.advertise<geometry_msgs::Twist>("/cmd_vel", 1);
     
 }
 
@@ -31,9 +31,9 @@ int main(int argc, char **argv)
 {
   ros::init(argc, argv, "robot_ps4_controller");
 
-  ros::NodeHandle nh;
+  ros::NodeHandle node_handler;
   
-  std::shared_ptr<GuiderJoyTeleop> robot(new GuiderJoyTeleop(nh));
+  std::shared_ptr<GuiderJoyTeleop> robot(new GuiderJoyTeleop(node_handler));
   std::thread vel(&GuiderJoyTeleop::velocityPublisher,robot);
 
   ros::spin();

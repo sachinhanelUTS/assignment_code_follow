@@ -1,8 +1,8 @@
 #include "../include/assignment_code_follow/environmentSensing.h"
 
-EnvironmentSensing::EnvironmentSensing(ros::NodeHandle nh) : nh_(nh)
+EnvironmentSensing::EnvironmentSensing(ros::NodeHandle node_handler) : node_handler_(node_handler)
 {
-    sub1_ = nh_.subscribe("/base_scan_raw", 10, &EnvironmentSensing::laserCallBack, this);
+    sub1_ = node_handler_.subscribe("/base_scan_raw", 10, &EnvironmentSensing::laserCallBack, this);
 }
 
 void EnvironmentSensing::status()

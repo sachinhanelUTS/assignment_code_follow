@@ -16,7 +16,7 @@
 class GuiderFollow
 {
 public:
-    GuiderFollow(ros::NodeHandle nh);
+    GuiderFollow(ros::NodeHandle node_handler);
     ~GuiderFollow();
 
     void markerCallback(const geometry_msgs::Vector3StampedPtr &msg);
@@ -24,7 +24,7 @@ public:
     void stop();
 
 private:
-    ros::NodeHandle nh_;
+    ros::NodeHandle node_handler_;
 
     ros::Subscriber marker_sub_;
     ros::Subscriber laser_sub_;

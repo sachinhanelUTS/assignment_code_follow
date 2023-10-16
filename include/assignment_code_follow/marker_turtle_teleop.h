@@ -15,7 +15,7 @@ class GuiderJoyTeleop
 {
 public:
 
-    GuiderJoyTeleop(ros::NodeHandle nh);
+    GuiderJoyTeleop(ros::NodeHandle node_handler);
     ~GuiderJoyTeleop();
 
     void joyCallback(const sensor_msgs::JoyPtr &msg);
@@ -23,7 +23,7 @@ public:
     void velocityPublisher();
 
 private:
-    ros::NodeHandle nh_;  
+    ros::NodeHandle node_handler_;  
     
     ros::Subscriber joy_sub_;
     ros::Publisher vel_pub_;

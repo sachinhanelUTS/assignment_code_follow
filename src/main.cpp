@@ -7,9 +7,9 @@ int main(int argc, char **argv)
 {
     ros::init(argc, argv, "guider_follow");
 
-    ros::NodeHandle nh;
+    ros::NodeHandle node_handler;
 
-    std::shared_ptr<GuiderFollow> robot(new GuiderFollow(nh));
+    std::shared_ptr<GuiderFollow> robot(new GuiderFollow(node_handler));
     std::thread vel(&GuiderFollow::stop, robot);
     ros::spin();
 
@@ -19,4 +19,5 @@ int main(int argc, char **argv)
 
     return 0;
     //hello
+    //hello2
 }
