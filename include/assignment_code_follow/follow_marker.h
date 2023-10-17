@@ -26,7 +26,7 @@ public:
 private:
     ros::NodeHandle node_handler_;
 
-    ros::Subscriber marker_sub_;
+    ros::Subscriber marker_subscriber_;
     ros::Subscriber laser_sub_;
     ros::Publisher vel_pub_;
     geometry_msgs::Twist twistMsg_;
@@ -45,7 +45,7 @@ private:
     {
         geometry_msgs::Vector3Stamped pose;
         double threshold_distance;
-        const double head_2_base_offset = 0.1088;
+        const double head_to_base_offset = 0.1088; //taken from google from schematic of fetch robot
         double shortest_dist;
         bool detected;
         bool reached;

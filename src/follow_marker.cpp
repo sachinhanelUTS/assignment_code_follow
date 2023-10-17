@@ -3,15 +3,17 @@
 GuiderFollow::GuiderFollow(ros::NodeHandle node_handler)
     : node_handler_(node_handler)
 {
-  marker_sub_ = node_handler_.subscribe("/aruco_single/position", 1000, &GuiderFollow::markerCallback, this);
+  // Subscribe the node to the position output of the aruco scanner and the lidar scan output of the fetch
+  marker_subscriber_ = node_handler_.subscribe("/aruco_single/position", 1000, &GuiderFollow::markerCallback, this);
   laser_sub_ = node_handler_.subscribe("/base_scan_raw", 100, &GuiderFollow::laserCallBack, this);
 
+  //set up the publisher for this node to output the data 
   vel_pub_ = node_handler_.advertise<geometry_msgs::Twist>("/cmd_vel", 1);
 
-  marker_.threshold_distance = 1.0 - marker_.head_2_base_offset;
+  marker_.threshold_distance = 0.5 - marker_.head_to_base_offset; //set max dist to 1
   ROS_INFO_STREAM("init");
 
-  duration_ = start_time_ - start_time_;
+  duration_ = start_time_ - start_time_; // setting the time to 0 using the simulation time
 
   sweep_complete_ = false;
   obstacle_reported_ = false;

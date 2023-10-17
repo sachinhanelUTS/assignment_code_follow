@@ -6,7 +6,7 @@ material cube
     {
       texture_unit
       {
-        texture cubetexture.png
+        texture aruco123CubeText.png
 	scale 1 1
       }
     }
