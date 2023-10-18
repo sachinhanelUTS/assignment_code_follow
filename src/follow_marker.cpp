@@ -14,7 +14,7 @@ FollowMarker::FollowMarker(ros::NodeHandle node_handler)
   duration_ = start_time_ - start_time_; // setting the time to 0 using the simulation time
 
   marker_.threshold_distance = 0.5 - marker_.head_to_base_offset; //set max dist to 1
-  ROS_INFO_STREAM("init");
+  ROS_INFO_STREAM("Tracking node initialised, will begin searching for aruco code");
 
 
   sweep_complete_ = false;
@@ -28,19 +28,24 @@ FollowMarker::~FollowMarker()
 
 void FollowMarker::markerCallback(const geometry_msgs::Vector3StampedPtr &msg)
 {
+  ROS_INFO_STREAM(std::to_string(markerId));
   // inform user of guider dtection
   if (!marker_.detected)
   {
     marker_.detected = true;
     search_reported_ = false;
-    ROS_INFO_STREAM("Guider Detected!");
+    ROS_INFO_STREAM("code detected!");
     sweep_complete_ = false;
   }
 
   // convert marker to pose to robot's ref. frame & calc distance
-  marker_.pose.vector.x = msg->vector.z;
+  marker_.pose.vector.x = msg->vector.z;//each one of these align
   marker_.pose.vector.y = msg->vector.x;
   marker_.pose.vector.z = msg->vector.y;
+  ROS_INFO_STREAM("xVect: " + std::to_string(marker_.pose.vector.x) +
+                " yVect: " + std::to_string(marker_.pose.vector.y) +
+                " zVect: " + std::to_string(marker_.pose.vector.z));
+
 
   marker_.shortest_dist = roundf64(sqrt(pow(marker_.pose.vector.x, 2) + pow(marker_.pose.vector.y, 2)) * 10) / 10;
 
@@ -60,6 +65,11 @@ void FollowMarker::markerCallback(const geometry_msgs::Vector3StampedPtr &msg)
   else
   {
     marker_.reached = false;
+
+    //NOTES FOR TWIST COMMANDS:
+    //positive x is forward
+    //positive y is to the right of the robot if youre facing forward
+    
     if (!obstacle_detected_)
     {
       // proportional control for linear velocity
