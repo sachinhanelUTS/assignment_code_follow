@@ -9,8 +9,8 @@ int main(int argc, char **argv)
 
     ros::NodeHandle node_handler;
 
-    std::shared_ptr<GuiderFollow> robot(new GuiderFollow(node_handler));
-    std::thread vel(&GuiderFollow::stop, robot);
+    std::shared_ptr<FollowMarker> robot(new FollowMarker(node_handler));
+    std::thread vel(&FollowMarker::stop, robot);
     ros::spin();
 
     ros::shutdown();

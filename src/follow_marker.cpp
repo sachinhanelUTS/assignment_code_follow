@@ -1,30 +1,32 @@
 #include "../include/assignment_code_follow/follow_marker.h"
 
-GuiderFollow::GuiderFollow(ros::NodeHandle node_handler)
+FollowMarker::FollowMarker(ros::NodeHandle node_handler)
     : node_handler_(node_handler)
 {
-  // Subscribe the node to the position output of the aruco scanner and the lidar scan output of the fetch
-  marker_subscriber_ = node_handler_.subscribe("/aruco_single/position", 1000, &GuiderFollow::markerCallback, this);
-  laser_sub_ = node_handler_.subscribe("/base_scan_raw", 100, &GuiderFollow::laserCallBack, this);
 
-  //set up the publisher for this node to output the data 
+  // Subscribe the node to the position output of the aruco scanner and the lidar scan output of the fetch
+  marker_subscriber_ = node_handler_.subscribe("/aruco_single/position", 1000, &FollowMarker::markerCallback, this);
+  laser_sub_ = node_handler_.subscribe("/base_scan_raw", 100, &FollowMarker::laserCallBack, this);
+
+  //set up the publisher for this node to output the data to modofiy the velocity of the fetch robot
   vel_pub_ = node_handler_.advertise<geometry_msgs::Twist>("/cmd_vel", 1);
+
+  duration_ = start_time_ - start_time_; // setting the time to 0 using the simulation time
 
   marker_.threshold_distance = 0.5 - marker_.head_to_base_offset; //set max dist to 1
   ROS_INFO_STREAM("init");
 
-  duration_ = start_time_ - start_time_; // setting the time to 0 using the simulation time
 
   sweep_complete_ = false;
   obstacle_reported_ = false;
   search_reported_ = false;
 }
 
-GuiderFollow::~GuiderFollow()
+FollowMarker::~FollowMarker()
 {
 }
 
-void GuiderFollow::markerCallback(const geometry_msgs::Vector3StampedPtr &msg)
+void FollowMarker::markerCallback(const geometry_msgs::Vector3StampedPtr &msg)
 {
   // inform user of guider dtection
   if (!marker_.detected)
@@ -95,7 +97,7 @@ void GuiderFollow::markerCallback(const geometry_msgs::Vector3StampedPtr &msg)
   start_time_ = ros::Time::now();
 }
 
-void GuiderFollow::laserCallBack(const sensor_msgs::LaserScanConstPtr &msg)
+void FollowMarker::laserCallBack(const sensor_msgs::LaserScanConstPtr &msg)
 {
   obstacle_detected_ = laserDetection_.detectObtacle(msg);
   laser_readings_ = laserDetection_.getLaserReading(msg);
@@ -133,7 +135,7 @@ void GuiderFollow::laserCallBack(const sensor_msgs::LaserScanConstPtr &msg)
   }
 }
 
-void GuiderFollow::stop()
+void FollowMarker::stop()
 {
   while (ros::ok)
   {
