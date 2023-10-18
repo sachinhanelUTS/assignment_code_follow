@@ -1,4 +1,4 @@
-# assignment_code_follow
+![image](https://github.com/sachinhanelUTS/assignment_code_follow/assets/64720029/81b1c670-b0da-4b13-81cd-4a04ccbf2d84)# assignment_code_follow
 ## What the Code does
 The following code should allow a fetch robot to follow and track a marker through a custom environment. The fetch robot will rotate and scan for the correct marker using the Aruco ROS library detector.
 Once the marker is spotted the robot will follow at a 0.5m distance, if there is an obstacle the robot should avoid it. The marker is attached to a turtle bot that can be controlled. </br>
@@ -61,7 +61,8 @@ catkin_make
 
 **RViz** </br>
 </br>
-4. <code>rviz_fetch_debug.rviz</code> </br></br>
+4. <code>rosrun rviz rviz -d ~/Documents/catkin_ws/src/assignment_code_follow/rviz/rviz_fetch_debug.rviz
+</code> </br></br>
 **Note:** Open Rviz >>> Open config >>> Navigate to this folder >>> Open Rviz folder</br>
 
 ## **Acknowledgments**
