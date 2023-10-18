@@ -8,7 +8,7 @@ LaserDetection::LaserDetection()
 {
 }
 
-bool LaserDetection::detectObtacle(sensor_msgs::LaserScan::ConstPtr laserScan)
+bool LaserDetection::obstructionDetect(sensor_msgs::LaserScan::ConstPtr laserScan)
 {
     double laser_reading = laserScan->range_max;                                  // get max reading
     int range_start = (laserScan->ranges.size() / 2) - (LASER_FIELD_OF_VIEW / 2); // consider star of FOV
@@ -30,7 +30,7 @@ bool LaserDetection::detectObtacle(sensor_msgs::LaserScan::ConstPtr laserScan)
     }
 }
 
-double LaserDetection::getLaserReading(sensor_msgs::LaserScan::ConstPtr laserScan)
+double LaserDetection::laserReadings(sensor_msgs::LaserScan::ConstPtr laserScan)
 {
     int range_start = (laserScan->ranges.size() / 2) - (LASER_FIELD_OF_VIEW / 2);
     int range_end = (laserScan->ranges.size() / 2) + (LASER_FIELD_OF_VIEW / 2);

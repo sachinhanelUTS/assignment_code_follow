@@ -12,9 +12,9 @@ public:
  
   LaserDetection();
  
-  bool detectObtacle(sensor_msgs::LaserScan::ConstPtr laserScan);
+  bool obstructionDetect(sensor_msgs::LaserScan::ConstPtr laserScan);
   
-  double getLaserReading(sensor_msgs::LaserScan::ConstPtr laserScan);
+  double laserReadings(sensor_msgs::LaserScan::ConstPtr laserScan);
 };
 
 #endif 
