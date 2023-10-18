@@ -1,6 +1,6 @@
 
-#ifndef DETECTCABINET_H
-#define DETECTCABINET_H
+#ifndef LIDAR_OUTPUT
+#define LIDAR_OUTPUT
 
 #include <sensor_msgs/LaserScan.h>
 
@@ -17,4 +17,4 @@ public:
   double getLaserReading(sensor_msgs::LaserScan::ConstPtr laserScan);
 };
 
-#endif // DETECTCABINET_H
+#endif 

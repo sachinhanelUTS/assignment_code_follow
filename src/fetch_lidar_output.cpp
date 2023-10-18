@@ -1,4 +1,4 @@
-#include "../include/assignment_code_follow/laserScan.h"
+#include "../include/assignment_code_follow/fetch_lidar_output.h"
 
 static const int LASER_FIELD_OF_VIEW = 140;
 static const double LASER_LIMIT = 0.35;

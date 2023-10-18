@@ -1,6 +1,6 @@
 
-#ifndef GUIDER_JOY_TELEOP_H
-#define GUIDER_JOY_TELEOP_H
+#ifndef MARKER_TURTLE_TELEOP
+#define MARKER_TURTLE_TELEOP
 
 #include "ros/ros.h"
 
@@ -31,4 +31,4 @@ private:
 };
 
 
-#endif // GUIDER_JOY_TELEOP_H
+#endif 

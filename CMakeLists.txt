@@ -63,7 +63,7 @@ link_directories(
 
 
 
-add_library(${PROJECT_NAME}-laserScan src/laserScan.cpp)
+add_library(${PROJECT_NAME}-fetch_lidar_output src/fetch_lidar_output.cpp)
 
 add_executable(${PROJECT_NAME}-marker_turtle_teleop src/marker_turtle_teleop.cpp)
 add_executable(${PROJECT_NAME}-follow_marker src/main.cpp src/follow_marker.cpp)
@@ -72,5 +72,5 @@ add_dependencies(${PROJECT_NAME}-marker_turtle_teleop ${${PROJECT_NAME}_EXPORTED
 add_dependencies(${PROJECT_NAME}-follow_marker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 target_link_libraries(${PROJECT_NAME}-marker_turtle_teleop ${catkin_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}-follow_marker ${catkin_LIBRARIES} ${PROJECT_NAME}-laserScan ${OpenCV_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}-follow_marker ${catkin_LIBRARIES} ${PROJECT_NAME}-fetch_lidar_output ${OpenCV_LIBRARIES})
 

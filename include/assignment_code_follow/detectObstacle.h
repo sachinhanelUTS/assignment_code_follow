@@ -17,7 +17,7 @@
 #include <cmath>
 #include "sensor_msgs/LaserScan.h"
 
-#include "laserScan.h"
+#include "fetch_lidar_output.h"
 
 class EnvironmentSensing
 {

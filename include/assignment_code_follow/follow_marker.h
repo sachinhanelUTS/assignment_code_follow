@@ -1,14 +1,14 @@
 
-#ifndef GUIDER_FOLLOW_H
-#define GUIDER_FOLLOW_H
+#ifndef FOLLOW_MARKER
+#define FOLLOW_MARKER
 
 #include "ros/ros.h"
 
 #include "geometry_msgs/Vector3Stamped.h"
 #include "geometry_msgs/Twist.h"
-#include "sensor_msgs/LaserScan.h"
+#include "sensor_msgs/LaserScan.h"//?
 #include "tf2_msgs/TFMessage.h"
-#include "laserScan.h"
+#include "fetch_lidar_output.h"
 #include <cmath>
 #include <chrono>
 #include <vector>
@@ -56,4 +56,4 @@ private:
     ros::Duration duration_; //!< duration since start time (seconds)
 };
 
-#endif // GUIDER_FOLLOW_H
+#endif
