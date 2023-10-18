@@ -20,7 +20,9 @@ James Farrel </br>
 - Custom models </br>
 
 ## Startup requirements
-The models need to be moved from the models folder to the ROS directory folder models
+- The models need to be moved from the models folder to the ROS directory folder models. </br>
+- Also please ensure that the png. has been correctly moved to the .gazebo >>> custom_turtlebot >>> meshes >>> textures. </br>
+If this step is not done the fetch bot will ignore the marker if any are visible. </br>
 
 ## Dependencies
 The program uses the Fetch robot and the Turtle bot packages. Please ensure that they are installed in the catkin workspace. 
@@ -71,7 +73,7 @@ The following resources were used to aid in the making of this project: </br>
   <li>https://github.com/ros-planning/navigation_tutorials</li>
 	<li>https://wiki.ros.org/navigation_tutorials</li>
 	<li>https://github.com/esteban-andrade/FetchRobotPathFollow</li>
-	<li>7 item</li>
+	<li>https://github.com/TRECVT/visp_auto_tracker</li>
 	<li>8 item</li>
 	<li>9 item</li>
 </ul>
