@@ -19,7 +19,7 @@
 
 #include "fetch_lidar_output.h"
 
-class EnvironmentSensing
+class DetectObstacle
 {
 private:
     ros::NodeHandle node_handler_;
@@ -31,8 +31,8 @@ private:
 public:
     //ros::NodeHandle node_handler_;
     LaserDetection laserDetection_;
-    EnvironmentSensing(ros::NodeHandle);
-    void status();
+    DetectObstacle(ros::NodeHandle);
+    void state();
 };
 
 #endif //ENVIRONMENTSENSING_H
