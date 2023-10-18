@@ -13,11 +13,11 @@
 #include <chrono>
 #include <vector>
 
-class GuiderFollow
+class FollowMarker
 {
 public:
-    GuiderFollow(ros::NodeHandle node_handler);
-    ~GuiderFollow();
+    FollowMarker(ros::NodeHandle node_handler);
+    ~FollowMarker();
 
     void markerCallback(const geometry_msgs::Vector3StampedPtr &msg);
     void laserCallBack(const sensor_msgs::LaserScanConstPtr &msg);
