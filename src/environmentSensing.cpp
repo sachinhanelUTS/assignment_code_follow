@@ -26,4 +26,5 @@ void EnvironmentSensing::laserCallBack(const sensor_msgs::LaserScanConstPtr &msg
     obstacle_detected_ = laserDetection_.detectObtacle(msg);
     laser_readings_ = laserDetection_.getLaserReading(msg);
     //ROS_INFO_STREAM(laser_readings_);
+    //Comment
 }
