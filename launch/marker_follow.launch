@@ -1,5 +1,7 @@
 <launch>
     <!-- marker using aruco tracker  -->
+
+    <arg name="markerId" default="123"/>
     <node pkg="aruco_ros" type="single" name="aruco_single">
 
         <remap from="/camera_info" to="/head_camera/rgb/camera_info" />
@@ -8,7 +10,7 @@
 
         <param name="image_is_rectified" value="True"/>
         <param name="marker_size"        value="0.36"/> <!-- change  from default-->
-        <param name="marker_id"          value="123"/> <!-- change from default original 369 -->
+        <param name="marker_id"          value="$(arg markerId)"/> <!-- change from default original 369 -->
 
         <param name="reference_frame"    value="head_camera_rgb_optical_frame"/>   <!-- marker pose -->
         <param name="camera_frame"       value="head_camera_rgb_optical_frame"/>
