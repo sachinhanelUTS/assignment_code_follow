@@ -1,6 +1,6 @@
 
-#ifndef LIDAR_OUTPUT
-#define LIDAR_OUTPUT
+#ifndef fetch_lidar_output_h
+#define fetch_lidar_output_h
 
 #include <sensor_msgs/LaserScan.h>
 

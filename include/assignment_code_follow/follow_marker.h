@@ -1,6 +1,6 @@
 
-#ifndef FOLLOW_MARKER
-#define FOLLOW_MARKER
+#ifndef follow_marker_h
+#define follow_marker_h
 
 #include "ros/ros.h"
 

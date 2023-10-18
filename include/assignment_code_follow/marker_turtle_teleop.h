@@ -1,6 +1,6 @@
 
-#ifndef MARKER_TURTLE_TELEOP
-#define MARKER_TURTLE_TELEOP
+#ifndef marker_turtle_teleop
+#define marker_turtle_teleop
 
 #include "ros/ros.h"
 

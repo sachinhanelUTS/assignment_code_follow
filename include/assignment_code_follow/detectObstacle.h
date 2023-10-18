@@ -1,7 +1,7 @@
 
 
-#ifndef ENVIRONMENTSENSING_H
-#define ENVIRONMENTSENSING_H
+#ifndef detectObstacle_h
+#define detectObstacle_h
 
 #include "ros/ros.h"
 #include "std_msgs/String.h"
