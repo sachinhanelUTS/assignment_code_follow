@@ -24,6 +24,7 @@
     </node>
 
     <!-- start the following node -->
-    <node respawn="true" pkg="assignment_code_follow" type="assignment_code_follow-follow_marker" name="marker_follow" output="screen"/>
+    <node respawn="true" pkg="assignment_code_follow" type="assignment_code_follow-follow_marker" name="marker_follow" output="screen">
         <param name="marker_id"          value="$(arg markerId)"/>
+    </node>
 </launch>

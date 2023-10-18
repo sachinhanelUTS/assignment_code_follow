@@ -27,8 +27,11 @@ FollowMarker::~FollowMarker()
 }
 
 void FollowMarker::markerCallback(const geometry_msgs::Vector3StampedPtr &msg)
-{
-  ROS_INFO_STREAM(std::to_string(markerId));
+{ 
+  int marker_id;
+  node_handler_.getParam("marker_id", marker_id);
+  std::string marker_id_string = std::to_string(marker_id);
+  //ROS_INFO_STREAM(std::to_string(marker_id));
   // inform user of guider dtection
   if (!marker_.detected)
   {
@@ -42,7 +45,8 @@ void FollowMarker::markerCallback(const geometry_msgs::Vector3StampedPtr &msg)
   marker_.pose.vector.x = msg->vector.z;//each one of these align
   marker_.pose.vector.y = msg->vector.x;
   marker_.pose.vector.z = msg->vector.y;
-  ROS_INFO_STREAM("xVect: " + std::to_string(marker_.pose.vector.x) +
+  ROS_INFO_STREAM("Located marker: " + marker_id_string + " ! Distance to marker for "
+                "xVect: " + std::to_string(marker_.pose.vector.x) +
                 " yVect: " + std::to_string(marker_.pose.vector.y) +
                 " zVect: " + std::to_string(marker_.pose.vector.z));
 
@@ -121,6 +125,10 @@ void FollowMarker::laserCallBack(const sensor_msgs::LaserScanConstPtr &msg)
       {
         ROS_INFO_STREAM("Obstacle blocking path. Stopped following");
         obstacle_reported_ = true;
+        system("rosnode kill marker_follow");
+        system("rosnode kill aruco_single");
+        system("roslaunch assignment_code_follow marker_follow.launch markerId:=200");
+
       }
       twistMsg_.angular.z = 0;
       twistMsg_.linear.x = 0;

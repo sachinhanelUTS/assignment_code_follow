@@ -39,7 +39,7 @@ private:
     bool obstacle_reported_;
     bool search_reported_;
     bool sweep_complete_;
-    int markerId;
+    int marker_id;
     tf2_msgs::TFMessageConstPtr pose_fetch_;
 
     struct Marker
