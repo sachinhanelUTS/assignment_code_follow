@@ -77,7 +77,7 @@ The following resources were used to aid in the making of this project: </br>
 	<li>https://wiki.ros.org/navigation_tutorials</li>
 	<li>https://github.com/esteban-andrade/FetchRobotPathFollow</li>
 	<li>https://github.com/TRECVT/visp_auto_tracker</li>
-	<li>8 item</li>
+	<li>https://github.com/pal-robotics/aruco_ros</li>
 	<li>9 item</li>
 </ul>
 
