@@ -113,8 +113,8 @@ void FollowMarker::markerCallback(const geometry_msgs::Vector3StampedPtr &msg)
 
 void FollowMarker::laserCallBack(const sensor_msgs::LaserScanConstPtr &msg)
 {
-  obstacle_detected_ = laserDetection_.detectObtacle(msg);
-  laser_readings_ = laserDetection_.getLaserReading(msg);
+  obstacle_detected_ = laserDetection_.obstructionDetect(msg);
+  laser_readings_ = laserDetection_.laserReadings(msg);
   //ROS_INFO_STREAM(laser_readings_);
 
   if (obstacle_detected_)

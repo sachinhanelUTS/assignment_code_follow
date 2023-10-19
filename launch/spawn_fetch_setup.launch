@@ -32,7 +32,7 @@
   <include file="$(find fetch_gazebo)/launch/include/$(arg robot).launch.xml" />
   
  <!-- control turtle robot with teleop-->
-  <arg name="teleop_topic" default="/robot1/cmd_vel"/>  
+  <!-- <arg name="teleop_topic" default="/robot1/cmd_vel"/>   -->
 
   <!-- Launch turtlebot as robot1 -->
   <group ns="robot1"> <!--change to turtle???????-->
@@ -47,7 +47,7 @@
 
   <!-- start the teleop keyboard for the turtle robot  -->
   <node pkg="joy" type="joy_node" name="joy_node"/>
-  <node name="marker_turtle_teleop" pkg="assignment_code_follow" type="assignment_code_follow-marker_turtle_teleop" args="-d $(find assignment_code_follow)" output="screen" respawn="true">
+  <!-- <node name="marker_turtle_teleop" pkg="assignment_code_follow" type="assignment_code_follow-marker_turtle_teleop" args="-d $(find assignment_code_follow)" output="screen" respawn="true">
       <remap from="/cmd_vel" to="/robot1/cmd_vel"/>
-  </node>
+  </node> -->
 </launch>
