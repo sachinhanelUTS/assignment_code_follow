@@ -9,11 +9,11 @@ void DetectObstacle::state()
 {
     while (ros::ok())
     {
-        if (obstacle_detected_ == false)
+        if (path_obstructed_ == false)
         {
             ROS_INFO_STREAM("An obstacle has been detected!!!");
         }
-        if (obstacle_detected_ == true)
+        if (path_obstructed_== true)
         {
             ROS_INFO_STREAM("Moving!!!");
         }
@@ -22,6 +22,6 @@ void DetectObstacle::state()
 
 void DetectObstacle::laserCallBack(const sensor_msgs::LaserScanConstPtr &msg)
 {
-    obstacle_detected_ = laserDetection_.detectObtacle(msg);
-    laser_readings_ = laserDetection_.getLaserReading(msg);
+    path_obstructed_= laserDetection_.obstructionDetect(msg);
+    laser_readings_ = laserDetection_.laserReadings(msg);
 }

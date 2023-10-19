@@ -25,7 +25,7 @@ private:
     ros::NodeHandle node_handler_;
     ros::Subscriber sub1_;
     double laser_readings_;
-    bool obstacle_detected_;
+    bool path_obstructed_;
     void laserCallBack(const sensor_msgs::LaserScanConstPtr &);
 
 public:
