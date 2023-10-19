@@ -1,0 +1,56 @@
+   
+
+    try:
+        pub_thread.wait_for_subscribers() #checks that there re subscribers to the node before publishing
+        pub_thread.update(x, y, z, th, speed, turn)
+        
+
+
+        print(msg)
+        print(vels(speed, turn))
+
+
+
+        while(1):
+            
+            print("before")
+            print(rospy.Time.now())
+            if rospy.Time.now() - startMoveTime > rospy.Duration(5.0):
+                x = 0
+                y = 0
+                z = 3
+                th = 0
+                status = 0
+                print("inside 5 sec")
+                pub_thread.update(x, y, z, th, speed, turn)
+            
+            if pub_thread.move_forward_start_time is None:
+                    pub_thread.move_forward_start_time = rospy.Time.now()
+            
+            #key = getKey(key_timeout)
+            print(msg)
+            #if key in moveBindings.keys():
+            #    speed = speed * speedBindings[key][0]
+            #    turn = turn * speedBindings[key][1]
+
+            #    print(vels(speed, turn))
+            #    if (status == 14):
+            #        print(msg)
+            #    status = (status + 1) % 15
+            #elif key == 'f':
+                #Press and release 'f' to move forward for 5 seconds.
+            #    if pub_thread.move_forward_start_time is None:
+            #        pub_thread.move_forward_start_time = rospy.Time.now()
+            else:
+                # Skip updating cmd_vel if key timeout and robot already
+                # stopped.
+                #if key == '' and x == 0 and y == 0 and z == 0 and th == 0:
+                #    continue
+                #x = 0
+                #y = 0
+                #z = 0
+                #th = 0
+                if (key == '\x03'):
+                    break
+
+            pub_thread.update(x, y, z, th, speed, turn)
