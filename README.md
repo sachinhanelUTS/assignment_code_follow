@@ -59,7 +59,9 @@ catkin_make
 
 **Control the burger turtle bot marker** </br>
 </br>
-3. <code>rosrun teleop_twist_keyboard teleop_twist_keyboard.py /cmd_vel:=/robot1/cmd_vel</code> </br>
+3a. **NEW Turt** <code>rosrun assignment_code_follow controller.py</code> </br></br>
+
+3b. **OLD** <code>rosrun teleop_twist_keyboard teleop_twist_keyboard.py /cmd_vel:=/robot1/cmd_vel</code> </br>
 
 **RViz** </br>
 </br>
