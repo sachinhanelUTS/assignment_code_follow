@@ -55,19 +55,21 @@ catkin_make
 **Begin tracking** </br>
 </br>
 <code>roslaunch assignment_code_follow marker_follow.launch </code></br>
-</br>**Note:** Do not delete the RQT tab that pops up </br>
+>Note: Do not delete the RQT tab that pops up </br>
+</br>
 
 **Control the burger turtle bot marker** </br>
 </br>
 3a. **NEW Turt** <code>rosrun assignment_code_follow controller.py</code> </br></br>
 
 3b. **OLD** <code>rosrun teleop_twist_keyboard teleop_twist_keyboard.py /cmd_vel:=/robot1/cmd_vel</code> </br>
+</br>
 
 **RViz** </br>
 </br>
 4. <code>rosrun rviz rviz -d ~/Documents/catkin_ws/src/assignment_code_follow/rviz/rviz_fetch_debug.rviz
-</code> </br></br>
-**Note:** Open Rviz >>> Open config >>> Navigate to this folder >>> Open Rviz folder</br>
+</code> 
+>Note: Open Rviz >>> Open config >>> Navigate to this folder >>> Open Rviz folder</br>
 
 ## **Acknowledgments**
 The following resources were used to aid in the making of this project: </br>
