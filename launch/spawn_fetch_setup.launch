@@ -3,21 +3,16 @@
   <env name="GAZEBO_MODEL_PATH" value="$(find fetch_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)" /> <!-- HAve to set this at the start so it can be used by other packages -->
 
     <!-- standard fetch args from fetch pckg -->
-  <arg name="debug" default="false"/>
-  <arg name="gui" default="true"/>
-  <arg name="headless" default="false"/>
 
-
-
-
+  <arg name="world_file" default="test_zone.sdf"/>
   <!-- start gazebo, taken from example code using default world file-->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="debug" value="$(arg debug)" />
-    <arg name="gui" value="$(arg gui)" />
+    <arg name="world_name" value="$(find assignment_code_follow)/worlds/$(arg world_file)"/>
+    <arg name="debug" value="false" />
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
-    <arg name="headless" value="$(arg headless)"/>
-    <arg name="world_name" value="$(find assignment_code_follow)/worlds/test_zone.sdf"/> <!-- NEED TO CHANGE THE WORLD-->
+    <arg name="gui" value="true" />
+    <arg name="headless" value="false"/>
   </include>
 
 
@@ -32,22 +27,43 @@
   <include file="$(find fetch_gazebo)/launch/include/$(arg robot).launch.xml" />
   
  <!-- control turtle robot with teleop-->
-  <!-- <arg name="teleop_topic" default="/robot1/cmd_vel"/>   -->
+  <!-- <arg name="teleop_topic" default="/turtleBurger/cmd_vel"/>   -->
 
-  <!-- Launch turtlebot as robot1 -->
-  <group ns="robot1"> <!--change to turtle???????-->
+   <!-- <arg name="sdf_robot_file" value="$(find turtlebot3_simulations)/turtlebot3_gazebo/models/turtlebot3_burger.sdf"/> THIS IS NOTES--> 
+
+
+
+
+  <!-- <param name="robot_description" command="$(find xacro)/xacro '$(find mypackage)/path/to/robot.xacro'" /> -->
+
+  <group ns="turtleBurger"> 
   	<include file="$(find assignment_code_follow)/launch/spawn_sdf.launch">
       <arg name="robot_name" value="turtlebot_burger"/>
-      <arg name="x" value="-3.0"/>
-      <arg name="y" value="-4.0"/>
-      <arg name="z" value="0.0"/>
       <arg name="sdf_robot_file" value="$(find assignment_code_follow)/models/custom_turtle/model.sdf"/>
+      <arg name="x" value="3.0"/>
+      <arg name="y" value="0.0"/>
+      <arg name="z" value="0.0"/>
+      
     </include>
   </group>
+
 
   <!-- start the teleop keyboard for the turtle robot  -->
   <node pkg="joy" type="joy_node" name="joy_node"/>
   <!-- <node name="marker_turtle_teleop" pkg="assignment_code_follow" type="assignment_code_follow-marker_turtle_teleop" args="-d $(find assignment_code_follow)" output="screen" respawn="true">
-      <remap from="/cmd_vel" to="/robot1/cmd_vel"/>
+      <remap from="/cmd_vel" to="/turtleBurger/cmd_vel"/>
   </node> -->
 </launch>
+
+
+
+  <!-- args for the turtle 
+       <arg name="model" default="burger" doc="model type [burger, waffle, waffle_pi]"/>
+      <arg name="x_pos" default="-2.0"s/>
+      <arg name="y_pos" default="-0.5"/>
+      <arg name="z_pos" default="0.0"/>
+
+      
+      <param name="robot_description" command="$(find xacro)/xacro (should be double dash here)inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
+      <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"  args="-urdf -model turtlebot3_$(arg model) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" /> 
+ -->

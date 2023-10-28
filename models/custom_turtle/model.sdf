@@ -55,7 +55,7 @@
           </noise>
         </ray>
         <plugin name='gazebo_ros_lds_lfcd_controller' filename='libgazebo_ros_laser.so'>
-          <topicName>robot1/scan</topicName>
+          <topicName>turtleBurger/scan</topicName>
           <frameName>base_scan</frameName>
           <robotNamespace>/</robotNamespace>
         </plugin>
@@ -628,7 +628,7 @@
     <allow_auto_disable>1</allow_auto_disable>
     <plugin name='imu_plugin' filename='libgazebo_ros_imu.so'>
       <alwaysOn>1</alwaysOn>
-      <topicName>robot1/imu</topicName>
+      <topicName>turtleBurger/imu</topicName>
       <serviceName>imu_service</serviceName>
       <gaussianNoise>0.0</gaussianNoise>
       <updateRate>200</updateRate>
@@ -656,9 +656,9 @@
       <rpyOffset>0 -0 0</rpyOffset>
     </plugin>
     <plugin name='turtlebot3_burger_controller' filename='libgazebo_ros_diff_drive.so'>
-      <commandTopic>robot1/cmd_vel</commandTopic>
-      <odometryTopic>robot1/odom</odometryTopic>
-      <odometryFrame>robot1/odom</odometryFrame>
+      <commandTopic>turtleBurger/cmd_vel</commandTopic>
+      <odometryTopic>turtleBurger/odom</odometryTopic>
+      <odometryFrame>turtleBurger/odom</odometryFrame>
       <odometrySource>world</odometrySource>
       <publishOdomTF>1</publishOdomTF>
       <robotBaseFrame>base_footprint</robotBaseFrame>

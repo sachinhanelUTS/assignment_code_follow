@@ -18,6 +18,4 @@ int main(int argc, char **argv)
     vel.join();
 
     return 0;
-    //hello
-    //hello2
 }

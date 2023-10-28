@@ -54,3 +54,51 @@
                     break
 
             pub_thread.update(x, y, z, th, speed, turn)
+
+
+
+
+
+
+
+void FollowMarker::laserCallBack(const sensor_msgs::LaserScanConstPtr &msg)
+{
+  obstacle_detected_ = laserDetection_.obstructionDetect(msg);
+  laser_readings_ = laserDetection_.laserReadings(msg);
+  //ROS_INFO_STREAM(laser_readings_);
+
+  if (obstacle_detected_)
+  {
+    if (marker_.detected)
+    {
+      if (!obstacle_reported_)
+      {
+        ROS_INFO_STREAM("Obstacle blocking path. Stopped following");
+        obstacle_reported_ = true;
+        //system("rosnode kill marker_follow");
+       // system("rosnode kill aruco_single");
+        //system("roslaunch assignment_code_follow marker_follow.launch markerId:=200");
+
+      }
+      twistMsg_.angular.z = 0;
+      twistMsg_.linear.x = 0;
+    }
+    else
+    {
+      if (!obstacle_reported_)
+      {
+        ROS_INFO_STREAM("Obstacle detected");
+        obstacle_reported_ = true;
+      }
+      twistMsg_.angular.z = 0;
+      twistMsg_.linear.x = -2.0;
+    }
+
+    vel_pub_.publish(twistMsg_);
+  }
+
+  if (!obstacle_detected_)
+  {
+    obstacle_reported_ = false;
+  }
+}
