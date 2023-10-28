@@ -33,12 +33,12 @@ rospy.init_node("speed_controller")
 sub = rospy.Subscriber("/turtleBurger/odom", Odometry, newOdom)
 pub = rospy.Publisher("/turtleBurger/cmd_vel", Twist, queue_size = 1)
 # Velocity command based on current position and orientation
-# 1. If the robot is not facing the next position, rotate and face it
-# 2. Once the robot is facing the position, move forward
-
+# If the robot is not facing the next position, rotate and face it
+# Once the robot is facing the position, move forward
 speed = Twist()
 
 r = rospy.Rate(50)  # 4Hz for publishing
+
 
 goal = Point()
 goal.x = 0
@@ -134,3 +134,4 @@ while not rospy.is_shutdown():
     # Now publish this value via the publisher
     pub.publish(speed)
     r.sleep()
+
