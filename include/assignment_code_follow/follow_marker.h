@@ -1,59 +1,68 @@
 
-#ifndef GUIDER_FOLLOW_H
-#define GUIDER_FOLLOW_H
+#ifndef follow_marker_h
+#define follow_marker_h
+
+#include <cmath>
+#include <chrono>
+#include <vector>
 
 #include "ros/ros.h"
 
 #include "geometry_msgs/Vector3Stamped.h"
 #include "geometry_msgs/Twist.h"
-#include "sensor_msgs/LaserScan.h"
 #include "tf2_msgs/TFMessage.h"
-#include "laserScan.h"
-#include <cmath>
-#include <chrono>
-#include <vector>
 
-class GuiderFollow
+
+
+
+class FollowMarker
 {
 public:
-    GuiderFollow(ros::NodeHandle nh);
-    ~GuiderFollow();
+    FollowMarker(ros::NodeHandle node_handler);
+    ~FollowMarker();
 
-    void markerCallback(const geometry_msgs::Vector3StampedPtr &msg);
-    void laserCallBack(const sensor_msgs::LaserScanConstPtr &msg);
+    void markerCall(const geometry_msgs::Vector3StampedPtr &msg);
+    void odomCallBack(const geometry_msgs::Vector3StampedPtr &msg);
     void stop();
 
 private:
-    ros::NodeHandle nh_;
 
-    ros::Subscriber marker_sub_;
-    ros::Subscriber laser_sub_;
-    ros::Publisher vel_pub_;
-    geometry_msgs::Twist twistMsg_;
-    ros::Subscriber pose_tracker_;
-
-    LaserDetection laserDetection_;
-
-    double laser_readings_;
-    bool obstacle_detected_;
-    bool obstacle_reported_;
-    bool search_reported_;
-    bool sweep_complete_;
-    tf2_msgs::TFMessageConstPtr pose_fetch_;
 
     struct Marker
     {
         geometry_msgs::Vector3Stamped pose;
-        double threshold_distance;
-        const double head_2_base_offset = 0.1088;
-        double shortest_dist;
-        bool detected;
         bool reached;
+        double goal_distance_to_marker;
+        long absDist;
+        bool detected;
+
     };
     Marker marker_;
 
-    ros::Time start_time_;   //!< start time
-    ros::Duration duration_; //!< duration since start time (seconds)
+    geometry_msgs::Twist twist_msg;
+
+
+    ros::NodeHandle node_handler_;
+
+    ros::Subscriber marker_subscriber;
+    ros::Publisher vel_publisher;
+    
+    ros::Time start_time_;   
+    ros::Duration duration_; 
+
+
+    long yPosSquared;
+    long xPosSquared;
+
+    bool publishSearchMsg;
+
+    int marker_id;
+
+
+    tf2_msgs::TFMessageConstPtr pose_fetch_;
+
+    
+    
 };
 
-#endif // GUIDER_FOLLOW_H
+#endif
