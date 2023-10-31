@@ -22,9 +22,10 @@ James Farrel </br>
 - Custom models </br>
 
 ## Startup requirements
-- The models need to be moved from the models folder to the ROS directory folder models. </br>
-- Also please ensure that the png. has been correctly moved to the .gazebo >>> custom_turtlebot >>> meshes >>> textures. </br>
-If this step is not done the fetch bot will ignore the marker if any are visible. </br>
+- The models need to be COPIED from the models folder to the ROS directory folder models (.gazebo/models) . </br>
+     - THIS MEANS THERE SHOULD BE A COPY OF ALL MODELS IN THE MODEL FOLDER OF THIS PACKAGE AND .GAZEBO MODELS FOLDER </br>
+- Also please ensure that the png. has been correctly moved to the .gazebo >>> newTurtlebot >>> meshes >>> textures. </br>
+If this step is not done the turtlebot will spawn incorrectly </br>
 
 ## Dependencies
 The program uses the Fetch robot and the Turtle bot packages. Please ensure that they are installed in the catkin workspace. 
