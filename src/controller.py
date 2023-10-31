@@ -54,7 +54,7 @@ angleDifStart = 0
 angleDifEnd = 0
 directionInvertCounter = 50
 
-xGoals = [6.36, 3.23, 0.09, -4.92, -1.43, 6.93, 18.40] 
+xGoals = [6.36, 3.23, 0.09, -4.92, -1.43, 6.93, 18.40] #x and y goals set here as 2 separate arrays
 
 yGoals = [1.8, 5.42, 6.52, 2.12, -0.79, -4.6, -3.06]
 
@@ -76,14 +76,14 @@ while not rospy.is_shutdown():
     if debugCounter == 1:
         angleDifStart = angle_to_goal - theta
 
-    if debugCounter == 10:
-        angleDifEnd = angle_to_goal - theta
+    if debugCounter == 10: #timer for debug massag, a
+        angleDifEnd = angle_to_goal - theta #following code finds which rotation direction will allow the robot to align with the angle most quickly
         if (angleDifEnd - angleDifStart) < 0:
             rotationDirection = rotationDirection
-        if (angleDifEnd - angleDifStart) > 0 and abs(angle_to_goal - theta) > 0.3:
+        if (angleDifEnd - angleDifStart) > 0 and abs(angle_to_goal - theta) > 0.3: 
             directionInvertCounter = directionInvertCounter + 10
             print("increasing...")
-        if (angleDifEnd - angleDifStart) > 0 and directionInvertCounter == 110:
+        if (angleDifEnd - angleDifStart) > 0 and directionInvertCounter == 110: #accounting for decelleration affecting the direction of angular velocity when turning
             rotationDirection = not rotationDirection
             directionInvertCounter = 0
         print("Stage:" + str(stage) +  "   X goal:" + str(xGoals[stage]) +  "   Y goal:" +  str(yGoals[stage]) +  "   Time Taken:" 
@@ -94,7 +94,7 @@ while not rospy.is_shutdown():
         debugCounter = 0
 
 
-    if abs(angle_to_goal - theta) > 1 and rotationDirection == 1:
+    if abs(angle_to_goal - theta) > 1 and rotationDirection == 1: #begin rotating towards the goal angle, depending on which rotation direction is selected by the optimiser above
         speed.linear.x = 0.0
         speed.angular.z = 0.55
         debugMessage = "Locating goal"

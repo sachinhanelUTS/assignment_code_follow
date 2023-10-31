@@ -4,7 +4,7 @@
 
     <!-- standard fetch args from fetch pckg -->
 
-  <arg name="world_file" default="test_zone.sdf"/>
+  <arg name="world_file" default="world_setup.sdf"/>
   <!-- start gazebo, taken from example code using default world file-->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find assignment_code_follow)/worlds/$(arg world_file)"/>
@@ -23,36 +23,30 @@
 
 
   <!-- start fetch -->
-  <arg name="robot" default="fetch"/>
-  <include file="$(find fetch_gazebo)/launch/include/$(arg robot).launch.xml" />
-  
- <!-- control turtle robot with teleop-->
-  <!-- <arg name="teleop_topic" default="/turtleBurger/cmd_vel"/>   -->
+  <!-- <arg name="robot" default="fetch"/>
+  <group ns="fetch"> 
+    <include file="$(find fetch_gazebo)/launch/include/$(arg robot).launch.xml" />
+      <arg name="x" value="0.0"/>
+      <arg name="y" value="0.0"/>
+      <arg name="z" value="0.0"/>
+    </include>
+  </group> -->
 
-   <!-- <arg name="sdf_robot_file" value="$(find turtlebot3_simulations)/turtlebot3_gazebo/models/turtlebot3_burger.sdf"/> THIS IS NOTES--> 
-
-
-
+<arg name="robot" default="fetch"/>
+<include file="$(find fetch_gazebo)/launch/include/$(arg robot).launch.xml" />
 
   <!-- <param name="robot_description" command="$(find xacro)/xacro '$(find mypackage)/path/to/robot.xacro'" /> -->
 
   <group ns="turtleBurger"> 
   	<include file="$(find assignment_code_follow)/launch/spawn_sdf.launch">
       <arg name="robot_name" value="turtlebot_burger"/>
-      <arg name="sdf_robot_file" value="$(find assignment_code_follow)/models/custom_turtle/model.sdf"/>
+      <arg name="sdf_robot_file" value="$(find assignment_code_follow)/models/newTurtle/model.sdf"/>
       <arg name="x" value="3.0"/>
       <arg name="y" value="0.0"/>
       <arg name="z" value="0.0"/>
       
     </include>
   </group>
-
-
-  <!-- start the teleop keyboard for the turtle robot  -->
-  <node pkg="joy" type="joy_node" name="joy_node"/>
-  <!-- <node name="marker_turtle_teleop" pkg="assignment_code_follow" type="assignment_code_follow-marker_turtle_teleop" args="-d $(find assignment_code_follow)" output="screen" respawn="true">
-      <remap from="/cmd_vel" to="/turtleBurger/cmd_vel"/>
-  </node> -->
 </launch>
 
 

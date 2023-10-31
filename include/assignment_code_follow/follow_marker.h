@@ -13,13 +13,15 @@
 #include "tf2_msgs/TFMessage.h"
 
 
+
+
 class FollowMarker
 {
 public:
     FollowMarker(ros::NodeHandle node_handler);
     ~FollowMarker();
 
-    void markerDetectedCallback(const geometry_msgs::Vector3StampedPtr &msg);
+    void markerCall(const geometry_msgs::Vector3StampedPtr &msg);
     void odomCallBack(const geometry_msgs::Vector3StampedPtr &msg);
     void stop();
 
@@ -29,34 +31,31 @@ private:
     struct Marker
     {
         geometry_msgs::Vector3Stamped pose;
-        double goal_distance_to_marker;
-        double shortest_dist;
-        long absDist;
-
-
-        bool detected;
         bool reached;
+        double goal_distance_to_marker;
+        long absDist;
+        bool detected;
+
     };
     Marker marker_;
 
-    geometry_msgs::Twist twistMsg_;
-    ros::Subscriber pose_tracker_;
+    geometry_msgs::Twist twist_msg;
+
 
     ros::NodeHandle node_handler_;
 
-    ros::Subscriber marker_subscriber_;
-    ros::Publisher vel_pub_;
+    ros::Subscriber marker_subscriber;
+    ros::Publisher vel_publisher;
     
     ros::Time start_time_;   
     ros::Duration duration_; 
 
 
-    bool obstacle_reported_;
     long yPosSquared;
     long xPosSquared;
 
-    bool do_search_;
-    
+    bool publishSearchMsg;
+
     int marker_id;
 
 

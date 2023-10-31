@@ -1,0 +1,14 @@
+material markerBox150Mat/Diffuse
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture markerBox150Text.png
+	scale 1 1 1
+      }
+    }
+  }
+}
